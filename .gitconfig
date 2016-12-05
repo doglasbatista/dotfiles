@@ -1,0 +1,52 @@
+[color]
+  ui = true
+
+[color "branch"]
+  local = green dim
+  current = yellow bold
+
+[color "status"]
+  added = green bold
+  changed = cyan dim
+  untracked = magenta
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[user]
+  name = doglasbatista
+  email = doglasbatista@gmail.com
+
+[alias]
+  a = add
+  aa = add .
+  s = status
+  r = reset HEAD
+  st = status
+  c = commit
+  ci = commit
+  b = branch
+  br = branch
+  co = checkout
+  df = diff
+  d = diff
+  p = push
+  l1 = log -1
+  l2 = log -2
+  l3 = log -3
+  l4 = log -4
+  l5 = log -5
+  fuckoff = push -f
+  dev = checkout develop
+  master = checkout master
+  add-ci = !git add -A && git commit -m
+  cont = rebase --continue
+
+[pull]
+  rebase = true
+
+[push]
+  default = current
