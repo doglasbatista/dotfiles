@@ -37,7 +37,8 @@ set foldlevel=2
 set ignorecase
 
 ""colorscheme pixelmuerto
-colorscheme Monosvkem
+""colorscheme Monosvkem
+colorscheme blame
 
 Plug 'itchyny/lightline.vim'
 Plug 'vim-scripts/BufLine'
