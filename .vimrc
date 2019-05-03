@@ -60,6 +60,9 @@ Plug 'Asheq/close-buffers.vim'
 Plug 'tpope/vim-commentary'
 Plug 'matze/vim-move'
 Plug 'kristijanhusak/vim-carbon-now-sh'
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL+C, CTRL+V
