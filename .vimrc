@@ -54,7 +54,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-signify'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/emmet-vim'
-Plug 'alexlafroscia/deoplete-flow'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'stephenway/postcss.vim'
@@ -64,12 +63,16 @@ Plug 'matze/vim-move'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'mxw/vim-jsx'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'weirongxu/coc-calc'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'alexlafroscia/deoplete-flow'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -147,24 +150,41 @@ nmap <C-f> :Ack<space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEOPLETE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" WILDMENU
+set completeopt+=noinsert
+set completeopt+=noselect
+
+let g:deoplete#file#enable_buffer_path=1
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#complete_method = "omnifunc"
+" TERNJS
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#depths = 1
 let g:deoplete#sources#ternjs#include_keywords = 1
+let g:deoplete#sources#ternjs#sort = 1
 "Add extra filetypes
 let g:deoplete#sources#ternjs#filetypes = [
-  \ 'jsx',
-  \ 'javascript.jsx',
-  \ 'vue',
-  \ '...'
-\ ]
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" WILDMENU
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ 'js',
+                \ 'ts',
+                \ '...',
+                \ ]
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmenu
 set wildmode=longest,list
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILEPATH AUTOCOMPLETE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set autochdir
+set autochdir
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAPLEADER
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=" "
+
 call plug#end()
