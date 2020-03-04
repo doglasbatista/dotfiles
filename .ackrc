@@ -1,0 +1,6 @@
+--ignore-file=is:.eslintcache
+--ignore-file=is:report.html
+--ignore-file=is:tags
+
+--ignore-dir=dist
+--ignore-dir=distSSR
