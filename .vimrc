@@ -36,7 +36,8 @@ set foldlevel=2
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 
-colorscheme hybrid_material
+colorscheme fogbell
+" colorscheme hybrid_material
 " colorscheme photon
 " colorscheme pixelmuerto
 " colorscheme Monosvkem
@@ -73,6 +74,7 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'Yggdroot/indentLine'
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -179,12 +181,18 @@ set wildmode=longest,list
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILEPATH AUTOCOMPLETE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set autochdir
+" set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPLEADER
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=" "
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM FOLDING
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fold all except current cursor and keep cursor position
+nnoremap <leader>zv :normal mazMzv`a<CR>
 
 call plug#end()
