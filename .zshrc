@@ -1,23 +1,25 @@
-export ZSH="/home/batman/.oh-my-zsh"
+export ZSH="/home/doglas/.oh-my-zsh"
 
-ZSH_THEME="simple"
+# ZSH_THEME="simple"
+ZSH_THEME="lambda-gitster"
 plugins=(
   git
   zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-alias vim ='nvim'
 alias gbda='git branch --merged | command grep -vE "^(\*|\s*(master|develop)\s*$)" | command xargs -n 1 git branch -d'
 
 alias be='bundle exec'
-alias nv='npm run validate'
-alias ns='npm run start'
-alias nd='npm run dev'
-alias nt='npm run test'
+alias nrv='npm run validate'
+alias nrs='npm run start'
+alias nrd='npm run dev'
+alias nrt='npm run test'
 alias ni='npm install'
+alias cra='npx create-react-app'
+
+alias vim='nvim'
 
 export TERM="screen-256color"
 
