@@ -75,6 +75,8 @@ Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Yggdroot/indentLine'
+Plug 'piiih/vim-ramda-import'
+
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -194,5 +196,11 @@ let mapleader=" "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fold all except current cursor and keep cursor position
 nnoremap <leader>zv :normal mazMzv`a<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM-RAMDA-IMPORT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" import function ramda
+nnoremap <C-i> :call ImportFunction()<CR>
 
 call plug#end()
