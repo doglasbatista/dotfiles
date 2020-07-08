@@ -43,6 +43,7 @@ colorscheme hybrid_material
 " colorscheme Monosvkem
 " colorscheme blame
 "
+Plug 'tasn/vim-tsx'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-scripts/BufLine'
 Plug 'scrooloose/nerdtree'
@@ -136,7 +137,7 @@ map <S-k> :bnext<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRLP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_custom_ignore = 'node_modules\|git\|dist\|coverage'
+let g:ctrlp_custom_ignore = 'node_modules\|git\|dist\|coverage\|resources'
 let g:ctrlp_use_caching=0
 let g:ctrlp_show_hidden = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
