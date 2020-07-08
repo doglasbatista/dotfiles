@@ -36,8 +36,8 @@ set foldlevel=2
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 
-colorscheme fogbell
-" colorscheme hybrid_material
+" colorscheme fogbell
+colorscheme hybrid_material
 " colorscheme photon
 " colorscheme pixelmuerto
 " colorscheme Monosvkem
@@ -67,16 +67,22 @@ Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'alexlafroscia/deoplete-flow'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Yggdroot/indentLine'
-Plug 'piiih/vim-ramda-import'
-
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'tasn/vim-tsx'
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css
+Plug 'jxnblk/vim-mdx-js'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'junegunn/fzf'
+Plug 'elm-tooling/elm-vim'
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -197,10 +203,36 @@ let mapleader=" "
 " Fold all except current cursor and keep cursor position
 nnoremap <leader>zv :normal mazMzv`a<CR>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM-RAMDA-IMPORT
+" LanguageClient-neovim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" import function ramda
-nnoremap <C-i> :call ImportFunction()<CR>
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    \ }
+
+" note that if you are using Plug mapping you should not use `noremap` mappings.
+nmap <F5> <Plug>(lcn-menu)
+" Or map each action separately
+nmap <silent>K <Plug>(lcn-hover)
+nmap <silent> gd <Plug>(lcn-definition)
+nmap <silent> <F2> <Plug>(lcn-rename)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_linters = { 'elm': ['elm_ls'] }
+let g:ale_elm_ls_use_global = 1
+let g:ale_elm_ls_executable = "/path/to/elm-language-server"
+let g:ale_elm_ls_elm_analyse_trigger = 'change'
+let g:ale_elm_ls_elm_path = "/path/to/elm"
+let g:ale_elm_ls_elm_format_path = "/path/to/elm-format"
+let g:ale_elm_ls_elm_test_path = "/path/to/elm-test"
 
 call plug#end()
+
+let g:iced_enable_default_key_mappings = v:true
