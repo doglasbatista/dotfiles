@@ -1,6 +1,6 @@
---ignore-file=is:.eslintcache
---ignore-file=is:report.html
---ignore-file=is:tags
-
 --ignore-dir=dist
---ignore-dir=distSSR
+--ignore-dir=build
+--ignore-dir=.dart_tool
+--ignore-dir=resources
+--ignore-dir=.shadow-cljs
+--ignore-dir=browser-test
