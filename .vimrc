@@ -43,7 +43,6 @@ colorscheme hybrid_material
 " colorscheme Monosvkem
 " colorscheme blame
 "
-Plug 'tasn/vim-tsx'
 Plug 'itchyny/lightline.vim'
 Plug 'vim-scripts/BufLine'
 Plug 'scrooloose/nerdtree'
@@ -69,7 +68,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html', 'mdx'] }
 Plug 'Yggdroot/indentLine'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'tasn/vim-tsx'
@@ -84,6 +85,13 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'junegunn/fzf'
 Plug 'elm-tooling/elm-vim'
+Plug 'sbdchd/neoformat'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'hankchiutw/flutter-reload.vim'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+Plug 'elixir-editors/vim-elixir'
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -137,7 +145,7 @@ map <S-k> :bnext<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRLP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_custom_ignore = 'node_modules\|git\|dist\|coverage\|resources'
+let g:ctrlp_custom_ignore = 'node_modules\|git\|dist\|coverage\|resources\|.shadow-cljs'
 let g:ctrlp_use_caching=0
 let g:ctrlp_show_hidden = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,9 +227,24 @@ let g:LanguageClient_serverCommands = {
 " note that if you are using Plug mapping you should not use `noremap` mappings.
 nmap <F5> <Plug>(lcn-menu)
 " Or map each action separately
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
+" nmap <silent>K <Plug>(lcn-hover)
+" nmap <silent> gd <Plug>(lcn-definition)
 nmap <silent> <F2> <Plug>(lcn-rename)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-definition)
+xmap <leader>gd  <Plug>(coc-definition)
+nmap <leader>gd  <Plug>(coc-definition)
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE
@@ -233,6 +256,12 @@ let g:ale_elm_ls_elm_analyse_trigger = 'change'
 let g:ale_elm_ls_elm_path = "/path/to/elm"
 let g:ale_elm_ls_elm_format_path = "/path/to/elm-format"
 let g:ale_elm_ls_elm_test_path = "/path/to/elm-test"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Flutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Format code
+nnoremap <leader>f :DartFmt<CR>
 
 call plug#end()
 
