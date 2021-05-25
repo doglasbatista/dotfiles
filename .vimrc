@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 set background=dark
 set t_Co=256
-" set term=screen-256color
 set encoding=utf8
 set fileformat=unix
 set autoindent
@@ -36,17 +35,22 @@ set foldlevel=2
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 
-" colorscheme fogbell
 colorscheme hybrid_material
-" colorscheme photon
-" colorscheme pixelmuerto
-" colorscheme Monosvkem
-" colorscheme blame
-"
+
+" CLOJURE CONFIG
+Plug 'Olical/aniseed'
+Plug 'Olical/conjure'
+Plug 'tpope/vim-dispatch'
+Plug 'clojure-vim/vim-jack-in'
+Plug 'radenling/vim-dispatch-neovim'
+" CLOJURE CONFIG
+
 Plug 'itchyny/lightline.vim'
 Plug 'vim-scripts/BufLine'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-fugitive'
 Plug 'mileszs/ack.vim'
 Plug 'dense-analysis/ale'
@@ -64,17 +68,13 @@ Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'Yggdroot/indentLine'
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'tasn/vim-tsx'
 Plug 'jxnblk/vim-mdx-js'
+Plug 'styled-components/vim-styled-components'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css	
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
+" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css coc-styled-components
 
 
 if (has("nvim"))
@@ -87,11 +87,38 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EMMET
+" FZF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:user_emmet_expandabbr_key='<Tab>'
-" map <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+map <C-p> :Files<CR>
+map <C-f> :Rg<CR>
+
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL+C, CTRL+V
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,69 +153,38 @@ autocmd BufWritePre * :%s/\s\+$//e
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <S-j> :bprev<CR>
 map <S-k> :bnext<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CTRLP
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_custom_ignore = 'node_modules\|git\|dist\|coverage'
-let g:ctrlp_use_caching=0
-let g:ctrlp_show_hidden = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM-MOVE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:move_key_modifier = 'C'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLORCOLUMN
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let &colorcolumn="80,100,120"
+let &colorcolumn="80,100"
 highlight ColorColumn ctermbg=gray
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTREE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <C-b> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ACK
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <C-f> :Ack<space>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" DEOPLETE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" WILDMENU
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" WILDMENU
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set completeopt+=noinsert
 set completeopt+=noselect
-
-let g:deoplete#file#enable_buffer_path=1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#complete_method = "omnifunc"
-" TERNJS
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#depths = 1
-let g:deoplete#sources#ternjs#include_keywords = 1
-let g:deoplete#sources#ternjs#sort = 1
-"Add extra filetypes
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ 'vue',
-                \ 'js',
-                \ 'ts',
-                \ '...',
-                \ ]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmenu
 set wildmode=longest,list
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FILEPATH AUTOCOMPLETE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set autochdir
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPLEADER
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=" "
+let maplocalleader = " "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM FOLDING
@@ -225,11 +221,15 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'css': ['prettier'],
-\}
+let g:ale_linters = {
+      \ 'clojure': ['clj-kondo']
+      \}
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PRETTIER
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+autocmd BufWritePre * :CocCommand prettier.formatFile
 
 call plug#end()
 
