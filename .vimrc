@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
-set background=dark
+" set background=dark
+set background=light
 set t_Co=256
 set encoding=utf8
 set fileformat=unix
@@ -35,7 +36,8 @@ set foldlevel=2
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 
-colorscheme hybrid_material
+" colorscheme hybrid_material
+colorscheme typewriter
 
 " CLOJURE CONFIG
 Plug 'Olical/aniseed'
@@ -43,7 +45,29 @@ Plug 'Olical/conjure'
 Plug 'tpope/vim-dispatch'
 Plug 'clojure-vim/vim-jack-in'
 Plug 'radenling/vim-dispatch-neovim'
+Plug 'jlesquembre/coc-conjure'
+
+let g:coc_global_extensions = ['coc-conjure']
 " CLOJURE CONFIG
+
+" WRITING
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'junegunn/goyo.vim'
+
+nnoremap <C-g> :Goyo<CR>
+"execut :Goyo on 'ctrl+g'
+
+" Configuration for vim-markdown
+let g:vim_markdown_conceal = 2
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_math = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_edit_url_in = 'tab'
+let g:vim_markdown_follow_anchor = 1
+" WRITING
 
 Plug 'itchyny/lightline.vim'
 Plug 'vim-scripts/BufLine'
@@ -74,7 +98,7 @@ Plug 'tasn/vim-tsx'
 Plug 'jxnblk/vim-mdx-js'
 Plug 'styled-components/vim-styled-components'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css coc-styled-components
+" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css coc-styled-components coc-conjure
 
 
 if (has("nvim"))
@@ -99,16 +123,17 @@ map <C-f> :Rg<CR>
 " Border color
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_OPTS = '--info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
+" after hl
+" 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
   \ 'hl+':     ['fg', 'Statement'],
   \ 'info':    ['fg', 'PreProc'],
