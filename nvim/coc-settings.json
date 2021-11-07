@@ -11,5 +11,7 @@
   "explorer.icon.enableNerdfont": false,
   "explorer.previewAction.onHover": false,
   "explorer.toggle": true,
-  "explorer.file.showHiddenFiles": true
+  "explorer.file.showHiddenFiles": true,
+  // elixir lsp
+  "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh"
 }
