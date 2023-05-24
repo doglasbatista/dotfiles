@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
 
   -- bufferline for neovim
-  use 'akinsho/bufferline.nvim'
+  use 'romgrk/barbar.nvim'
   use 'moll/vim-bbye'
 
   -- move lines and blocks
