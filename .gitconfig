@@ -25,32 +25,27 @@
   aa = add .
   s = status
   r = reset HEAD
-  st = status
   c = commit
-  ci = commit
   b = branch
-  br = branch
+  ci = commit
   co = checkout
-  df = diff
   d = diff
   p = push
-  l1 = log -1
-  l2 = log -2
-  l3 = log -3
-  l4 = log -4
-  l5 = log -5
-  fuckoff = push -f
+  fuckoff = push --force-with-lease
   dev = checkout develop
   master = checkout master
-  add-ci = !git add -A && git commit -m
   cont = rebase --continue
+  abort = rebase --abort
+  skip = rebase -skip-
   l = log --all --graph --decorate --oneline --simplify-by-decoration
+  fuck = clean -fdx
 
 [pull]
   rebase = true
 
 [push]
   default = current
+  autoSetupRemote = true
 
 [core]
   editor = nvim
