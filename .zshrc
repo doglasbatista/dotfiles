@@ -1,27 +1,34 @@
-export ZSH="/home/doglas/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # ZSH_THEME="simple"
-ZSH_THEME="lambda-gitster"
+# ZSH_THEME="lambda-gitster"
+ZSH_THEME="logico"
+
 plugins=(
   git
   zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
-
-alias gbda='git branch --merged | command grep -vE "^(\*|\s*(master|develop)\s*$)" | command xargs -n 1 git branch -d'
-
-alias nrv='npm run validate'
-alias nrs='npm run start'
-alias nrd='npm run dev'
-alias nrt='npm run test'
-alias ni='npm install'
-alias cra='npx create-react-app'
+# git branch | grep -v "master" | xargs git branch -D
+alias gbda='git branch | grep -v "master" | xargs git branch -D'
+alias gbda='git branch | egrep -v "(^\*|master|main|dev)" | xargs git branch -d'
+alias gorigin='git show-branch | sed "s/].*//" | grep "\*" | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -n1 | sed "s/^.*\[//"'
 
 alias vim='nvim'
+alias vi='nvim'
 
-export TERM="screen-256color"
+
+source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export TERM=xterm-256color
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export PATH=/usr/local/bin:$PATH
+
+# PNPM START
+export PNPM_HOME="/Users/doglas/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+alias pn='pnpm'
+# PNPM END
