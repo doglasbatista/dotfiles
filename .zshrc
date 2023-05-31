@@ -32,3 +32,8 @@ export PATH="$PNPM_HOME:$PATH"
 
 alias pn='pnpm'
 # PNPM END
+
+# DEFAULT EDITOR START
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+# DEFAULT EDITOR END
