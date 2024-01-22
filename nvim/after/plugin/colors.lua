@@ -1,8 +1,13 @@
 local cmd = vim.cmd
 
-cmd([[set background=dark]])
-cmd([[colorscheme gruvbox]])
+cmd([[set termguicolors]])
 
-require("gruvbox").setup({
-	contrast = "soft",
-})
+-- cmd([[set background=dark]])
+-- cmd([[colorscheme gruvbox]])
+
+-- require("gruvbox").setup({
+-- 	contrast = "soft",
+-- })
+
+cmd [[set background=light]]
+cmd [[colorscheme zenbones]]

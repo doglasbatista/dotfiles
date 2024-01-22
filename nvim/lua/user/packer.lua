@@ -14,6 +14,13 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  use {
+    "rest-nvim/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  }
+
+  use 'vimwiki/vimwiki'
+
   -- auto close brackets, parens, quotes, etc...
   use 'windwp/nvim-autopairs'
 
@@ -21,12 +28,14 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
+  use 'nvim-telescope/telescope-fzy-native.nvim'
 
   -- statusline
   use 'hoob3rt/lualine.nvim'
 
   use 'theprimeagen/harpoon'
 
+  -- vscode-like pictograms
   use 'onsails/lspkind.nvim'
 
   use 'jose-elias-alvarez/null-ls.nvim'
@@ -35,6 +44,7 @@ return require('packer').startup(function(use)
 
   -- bufferline for neovim
   use 'romgrk/barbar.nvim'
+  -- use 'akinsho/bufferline.nvim'
   use 'moll/vim-bbye'
 
   -- move lines and blocks
@@ -44,12 +54,22 @@ return require('packer').startup(function(use)
   use 'yamatsum/nvim-cursorline'
 
   -- file explorer tree
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'nvim-tree/nvim-tree.lua',
+    commit = '8d82c4dbe15913655b509dcf1179b2ac7c69f9c5'
+  }
 
   -- devicons for neovim
   use 'kyazdani42/nvim-web-devicons'
 
   -- colorschemas
+  use {
+    'mcchrish/zenbones.nvim',
+    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+    requires = 'rktjmp/lush.nvim'
+  }
   use 'ellisonleao/gruvbox.nvim'
 
   use({
@@ -72,7 +92,6 @@ return require('packer').startup(function(use)
 
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("nvim-treesitter/playground")
-  use("theprimeagen/refactoring.nvim")
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
   use {
@@ -81,7 +100,7 @@ return require('packer').startup(function(use)
       require('gitsigns').setup()
     end
   }
-  use("nvim-treesitter/nvim-treesitter-context");
+  -- use("nvim-treesitter/nvim-treesitter-context");
 
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -126,7 +145,12 @@ return require('packer').startup(function(use)
   }
   use { 'saadparwaiz1/cmp_luasnip' }
 
-  use("github/copilot.vim")
-  use("eandrju/cellular-automaton.nvim")
-  use("laytan/cloak.nvim")
+  use {
+    'folke/todo-comments.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+
+  -- refactoring
+  -- use 'theprimeagen/refactoring.nvim'
+  -- use 'napmn/react-extract.nvim'
 end)

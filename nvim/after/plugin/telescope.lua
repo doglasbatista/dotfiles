@@ -10,3 +10,25 @@ vim.keymap.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
+
+require('telescope').setup {
+  defaults = {
+    file_ignore_patterns = {
+      -- "/.*node_modules",
+      -- "/.*dist",
+      "node_modules",
+      "dist",
+      "**/node_modules",
+      "**/dist",
+      "**/vendor",
+      "**/public",
+    }
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = false,
+      override_file_sorter = true,
+    }
+  }
+}
+require('telescope').load_extension('fzy_native')

@@ -1,8 +1,14 @@
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 vim.keymap.set("n", "<leader>gd", "=dv")
 
+-- RESOLVE GIT CONFLICT
+-- select left
 vim.keymap.set("n", "gf", "<cmd>diffget //2<CR>")
+-- select right
 vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
+
+-- open Git in a 20% split
+vim.keymap.set("n", "<leader>gg", ":Git | :resize 20<CR>")
 
 local autocmd = vim.api.nvim_create_autocmd
 autocmd("BufWinEnter", {
